@@ -1,0 +1,6 @@
+Simple repo to hold code for esp8266 sensor readings
+
+esp8266 will read sensor data and post to
+via api to pi store in a database.
+
+Next comes data visualization.

@@ -1,0 +1,4 @@
+*.venv
+*config*
+*start_main.sh
+*__pycache__*
