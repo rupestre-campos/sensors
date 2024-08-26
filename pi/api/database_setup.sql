@@ -1,4 +1,7 @@
+-- create database on your postgres
 CREATE DATABASE sensors;
+
+-- Then switch to new created database to run following commands
 
 CREATE TABLE sensor_data (
     id UUID PRIMARY KEY,
@@ -7,3 +10,5 @@ CREATE TABLE sensor_data (
     humidity FLOAT NOT NULL,
     datetime TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX sensor_data_datetime ON sensor_data (datetime);

@@ -1,5 +1,6 @@
 import gc
 import main
+import machine
 try:
     main.main()
 except KeyboardInterrupt as e:
@@ -7,4 +8,5 @@ except KeyboardInterrupt as e:
 except Exception as e:
     print('Error on boot.py: {}'.format(e))
     gc.collect()
+    machine.reset()
     pass

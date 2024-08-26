@@ -1,29 +1,37 @@
 import network
 import gc
 import time
+import machine
 
-class connection:
-    def __init__(self,ssid='',pwd=''):
+class Connection:
+    def __init__(self, ssid='wifi_name', pwd='wifi_hard_password'):
         self.sta_if = network.WLAN(network.STA_IF)
-        self.ssid = 'wifi_name'
-        self.pwd = 'wifi_hard_password'
-        self.do_connect()
+        self.ssid = ssid
+        self.pwd = pwd
+        self.connect()
 
-    def do_connect(self):
+    def connect(self):
         if not self.sta_if.isconnected():
             self.sta_if.active(True)
             self.sta_if.connect(self.ssid, self.pwd)
-            print('Conectando a rede', self.ssid +"...")
-            while True:
-                if self.sta_if.isconnected():
-                    break
+            print(f'Connecting to network: {self.ssid}...')
+            start_time = time.time()
+            timeout = 30
+
+            while not self.sta_if.isconnected():
+                if time.time() - start_time > timeout:
+                    print('Failed to connect to network.')
+                    self.restart_device()
+                    return
                 time.sleep(1)
                 gc.collect()
 
-        print(
-            'Configuracao de rede (IP/netmask/gw/DNS):',
-            self.sta_if.ifconfig())
+            print('Network configuration (IP/netmask/gw/DNS):', self.sta_if.ifconfig())
 
     def test_connection(self):
         if not self.sta_if.isconnected():
-            self.do_connect()
+            self.connect()
+
+    def restart_device(self):
+        print('Restarting device...')
+        machine.reset()

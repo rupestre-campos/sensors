@@ -3,3 +3,4 @@ uvicorn
 asyncpg
 sqlalchemy
 uuid7
+python-dotenv

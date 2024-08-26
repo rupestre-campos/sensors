@@ -1,0 +1,22 @@
+chmod +x streamlit_run.sh
+
+
+Replace user with your username in User and paths bellow
+
+sudo nano /etc/systemd/system/streamlit.service
+
+
+[Unit]
+Description=Streamlit App
+After=network.target
+
+[Service]
+Type=simple
+User=cx
+WorkingDirectory=/home/cx/sensors/app/
+ExecStart=/home/cx/sensors/app/streamlit_run.sh
+Restart=always
+Environment="PATH=/home/cx/sensors/app/.venv/bin"
+
+[Install]
+WantedBy=multi-user.target

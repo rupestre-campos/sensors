@@ -1,6 +1,45 @@
-Simple repo to hold code for esp8266 sensor readings
+![alt text](image.png)
 
-esp8266 will read sensor data and post to
-via api to pi store in a database.
+Simple repo to hold code for sensor system
+ - using esp8266 on the sensor side with bme280;
+ - raspberry pi as backbone to:
+    - receive, manage and serve data with fastAPI;
+    - store in postgres;
+    - serve with streamlit;
 
-Next comes data visualization.
+VERY SIMPLE How tos
+
+
+
+pi (DB, API, frontend)
+install postgres and connect to it with pgadmin
+run database_setup.sql on pgadmin
+first CREATE DATABASE sensors;
+then open sql window inside this database to them run other commands
+
+install python3-venv
+
+clone repo and cd into it
+for each folder app and api:
+update paths to match your user name
+create services specified in README for api and app
+create virtual envs
+python -m venv .venv
+source .venv/bin/activate
+(.venv) python -m pip install -r requirements.txt
+
+sudo systemctl start streamlit.service
+sudo systemctl start sensorapi.service
+
+go to http://pi-ip-localnetwork:8510 for frontend
+go to http://pi-ip-localnetwork:5000 for API
+
+
+esp8266 setup
+
+install thonny IDE
+connect esp8266 via usb to computer
+install micropython on it
+update code for your network ssid, password and fastapi url
+upload code to device
+test, add some prints and check pi setup

@@ -1,0 +1,25 @@
+
+Install postgres, create database and tables
+
+run server with
+
+uvicorn main:app --reload --port 5000
+
+create a service
+Replace user with your username in User and paths bellow
+
+sudo nano /etc/systemd/system/sensorapi.service
+
+[Unit]
+Description=Sensor FastAPI Service
+After=network.target
+
+[Service]
+User=cx
+Group=cx
+WorkingDirectory=/home/cx/sensors
+ExecStart=/home/cx/sensors/.venv/bin/uvicorn main:app --host 0.0.0.0 --port 5000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
