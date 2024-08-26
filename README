@@ -1,4 +1,4 @@
-![alt text](image.png)
+![alt text](https://raw.githubusercontent.com/rupestre-campos/sensors/main/image.png)
 
 Simple repo to hold code for sensor system
  - using esp8266 on the sensor side with bme280;
